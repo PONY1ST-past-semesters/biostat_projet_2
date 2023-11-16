@@ -42,7 +42,7 @@ print(result.km)
 #Le délai médian jusqu'à la cécité pour les patients qui n'ont pas reçu de traitement au laser était de 43,7 mois. 
 #L'intervalle de confiance à 95 % pour cette estimation était large, allant de 31,6 à 59,8 mois.
 
- #1e test de log-rank
+#1e test de log-rank
 result.logrank <- survdiff(Surv(time, status) ~ trt, data = diabetic)
 print(result.logrank)
 #Les résultats du test du chi-carré (Chisq=22,2, p=2e-06), dans lequel nous pouvons voir que la valeur p est bien inférieure à 0,05. 
