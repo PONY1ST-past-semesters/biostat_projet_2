@@ -1,0 +1,37 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+\section*{Exercice 2c}
+
+Décrivez dans vos mots les trois tests statistiques discutés en Sections 5.3.1, 5.3.2,
+5.3.3 du livre "Applied Survival Analysis Using R" de Moore (2016) pour les coefficients dans le modèle de Cox. 
+Comme dans la Section 5.3., dans un deuxième temps, discutez/comparez entre les trois tests leurs avantages et
+inconvénients. Cette réponse devrait consister en environ $8$ à $12$ lignes max au total.
+
+\smallskip
+\paragraph{Solution}
+
+Écrire $h_i(t_j)$ pour le hasard de patient $i$ au temps d'échec $t_j$.
+Si l'hypothèse de proportionnalité est vraie,
+on peut écrire $h_i(t_j) = h_0(t_j) \psi_i = h_0(t_j) e^{z_i \beta}$
+où $h_0$ est le hasard de référence, $z_i \in \{0, 1\}$ selon 
+si le patient $i$ est dans le groupe de traitement ou le groupe de contrôle
+et $\beta$ est le paramètre à estimer. 
+La vraisemblance partielle est définie par 
+$L(\beta) = \prod_{k=1}^D \frac{\psi_i}{\sum_{l \in R_k} \psi_l} $
+où $D$ est le nombre d'échecs et $R_k$ est l'ensemble des patients à risque au temps $t_k$.
+On teste l'hypothèse nulle $H_0 : \beta = 0$.
+Fixer un niveau $\alpha \in (0, \frac{1}{2})$.
+Écrire $l = \ln (L)$, $S = l'$, $I = - l''$ et soit $\hat{\beta} \in \argmax_{\beta} L(\beta)$.
+Le test de Wald rejette $H_0$ si $\abs{\hat{\beta} \sqrt{I(\hat{\beta})} } > z_{\frac{\alpha}{2}}$.
+Le test du score rejette $H_0$ si $\abs{\frac{S(0)}{\sqrt{I(0)}}} > z_{\frac{\alpha}{2}}$.
+Le test du ratio vraisemblance rejette $H_0$ si $\abs{2(l(\hat{\beta})-l(0))} > \chi^2_{\frac{\alpha}{2},1}$.
+Si on ne peut pas obtenir $\hat{\beta}$, il faut utiliser le test du score.
+Supposons à partir de maintenant qu'on a obtient $\hat{\beta}$.
+Le résultat du test du ratio vraisemblance a un avantage par rapport aux deux autres tests
+qu'il est invariant contre les transformations monotones.
+Si l'invariance n'est pas nécessaire, alors le test de Wald est plus commun et plus facile à calculer. ////
+
+\end{CJK*}
+\end{document}

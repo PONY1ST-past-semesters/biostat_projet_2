@@ -1,0 +1,33 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+
+\section*{Exercice 1a}
+Décrivez brièvement les variables du jeu de données 
+\texttt{diabetic} dans la bibliothèque \texttt{survival} en R.
+Quelle était une question de recherche menant à cette collecte de données ?
+
+\paragraph{Solution}
+
+\begin{itemize}
+  \item \textbf{ID} : Il est utilisé pour distinguer chaque participant dans l'ensemble de données.
+  \item \textbf{laser} : Il s'agit du type de traitement laser reçu. $1=\text{xenon}, 2=\text{argon}$.
+  \item \textbf{age} : Il s'agit de l'âge auquel le diabète a été diagnostiqué chez le patient.
+  \item \textbf{eye} : Il s'agit d'un facteur avec des niveaux de gauche et de droit.
+  \item \textbf{trt} : Il s'agit du groupe de traitement. $0=\text{contrôle}, 1=\text{laser}$.
+  \item \textbf{risk} : Il s'agit de classer les participants dans les groupes de risques différents.
+  Les valeurs varient de $6$ à $12$ où $6$ représente le groupe avec risque le plus petit.
+  \item \textbf{time} : Il s'agit du nombre de jours du début de la recherche à la cécité 
+  ou à la dernière observation.
+  \item \textbf{status} : Il s'agit d'une variable binaire 
+  pour indiquer si une perte de vision s'est produite au cours de la période d'étude, 
+  où $0$ signifie qu'on ne perd pas de vision et $1$ pour le contraire.
+\end{itemize}
+
+Ces données proviennent d'une étude d'analyse de 
+la survie de patients atteints de rétinopathie diabétique à haut risque, 
+conçue pour évaluer l'efficacité du traitement au laser dans le ralentissement de la progression de la cécité. ////
+
+\end{CJK*}
+\end{document}

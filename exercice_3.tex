@@ -1,0 +1,37 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+\section*{Exercice 3}
+Pour le jeu de données 
+\texttt{datasurv.txt}, 
+écrire $t_1 < \cdots < t_D$ pour tous les temps distincts d'échec, 
+$n_i$ pour le nombre de sujets à risque au temps $t_i$
+et $d_i$ pour le nombre d'échecs au temps $t_i$.
+Comme les patients à risque inclut ceux qui ont eu un échec,
+on a $n_i \geqslant d_i \geqslant 1$ pour tout $i$.
+On définit $q_i = \frac{d_i}{n_i}$ et $S(t) = \prod_{t_i \leqslant t} (1 - q_i)$
+pour tout $t \in \{1, \cdots, t_D\}$.
+Produisez un tableau de valeurs de $t_i$, $n_i$, $d_i$, $q_i$ et $S(t_i)$.
+
+En R, réalisez un graphique de $q$ en fonction de $t$ pour $t \in \{1, \cdots, 500\}$.
+Ici, $q(t) = q_i$ si $t \in \{1, \cdots, t_D\}$ et $q(t) = 0$ sinon.
+Produisez en particulière le même graphique pour $t \in \{200, \cdots, 260\}$
+Finalement, lissez cela utilisant le noyau d'Epanechnikov avec un paramètre de lissage $5$.
+Plus précisément, on définit le noyau d'Epanechnikov comme $K(u) = \frac{3}{4}(1-u^2)\chi_{[-1,1]}(u)$
+pour tout $u \in \mathbb{R}$ et on définit la fonction de lissage comme :
+
+\begin{equation*}
+    \hat{h}(t) = \frac{1}{b} \sum_{i=1}^D K\bracket{\frac{t-t_i}{b}} q_i
+\end{equation*}
+
+Ici $b = 5$. 
+Produisez un graphique de $\hat{h}$ en fonction de $t$ pour $t \in \{200, \cdots, 260\}$.
+Vérifiez les résultats en main pour $t = \{200, 210, 220, 230, 240, 250\}$.
+
+\paragraph{Solution}
+
+à complet
+
+\end{CJK*}
+\end{document}
