@@ -73,6 +73,11 @@ attach(rotterdam)
 #2a
 resultat.cox <- coxph(Surv(rtime, recur) ~ age + meno + size + grade + nodes + chemo, data = rotterdam)
 print(summary(resultat.cox))
+\end{lstlisting}
+
+La réponse est :
+
+\begin{lstlisting}
 Call:
 coxph(formula = Surv(rtime, recur) ~ age + meno + size + grade + 
     nodes + chemo, data = rotterdam)
@@ -103,7 +108,6 @@ Concordance= 0.678  (se = 0.007 )
 Likelihood ratio test= 468.6  on 7 df,   p=<2e-16
 Wald test            = 589.9  on 7 df,   p=<2e-16
 Score (logrank) test = 647.9  on 7 df,   p=<2e-16
-
 \end{lstlisting}
 \end{CJK*}
 \end{document}
