@@ -6,10 +6,11 @@
 \section*{Exercice 3d}
 On compare deux estimateurs de la fonction de risque et produire deux graphiques séparés.
 \begin{enumerate}
-  \item1. Il représente la fonction $h^\hat{(t)} = \frac{d_i}{n_i}$, l'intervalle de temps est $t$ entre 200 et 260.\
+  \item1. Il représente la fonction $h^\hat{(t)} = \frac{d_i}{n_i}$, l'intervalle de temps est $t$ entre 200 et 260.
   \item2. Il montre la fonction $h^\hat{(t)}$ lissée avec le noyau d'Epanechnikov, également pour $t$ entre 200 et 260.
 \end{enumerate}
 
+\paragraph{Solution}
 
 \begin{lstlisting}
 #3d
@@ -58,7 +59,9 @@ show(p)
   \label{fig:mesh1}
 \end{figure}
 
-
+En comparant, on trouve que le deuxième graphique est plus doux que le premier.
+Le deuxième graphique présente également un nouveau pic, 
+qui s'explique par le fait qu'une personne est décédée le jour 196.
 
 \end{CJK*}
 \end{document}
