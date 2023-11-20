@@ -2,7 +2,7 @@
 
 \begin{document}
 \begin{CJK*}{UTF8}{gbsn}
-\section*{Exercice 3}
+\section*{Exercice 3a}
 Pour le jeu de données 
 \texttt{datasurv.txt}, 
 écrire $t_1 < \cdots < t_D$ pour tous les temps distincts d'échec, 
@@ -14,6 +14,71 @@ On définit $q_i = \frac{d_i}{n_i}$ et $S(t) = \prod_{t_i \leqslant t} (1 - q_i)
 pour tout $t \in \{1, \cdots, t_D\}$.
 Produisez un tableau de valeurs de $t_i$, $n_i$, $d_i$, $q_i$ et $S(t_i)$.
 
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+t & n & d & q & 1-q & S \\ \hline
+196 & 18 & 1 & 0.0556 & 0.9444 & 0.9444 \\ \hline
+258 & 13 & 1 & 0.0769 & 0.9231 & 0.8718 \\ \hline
+262 & 12 & 1 & 0.0833 & 0.9167 & 0.7991 \\ \hline
+375 & 5 & 1 & 0.2000 & 0.8000 & 0.6393 \\ \hline
+377 & 3 & 1 & 0.3333 & 0.6667 & 0.4262 \\ \hline
+409 & 2 & 1 & 0.5000 & 0.5000 & 0.2131 \\ \hline
+\end{tabular}
+\caption{Résultats de l'analyse de survie}
+\label{table:surv_analysis}
+\end{table}
+
+\begin{lstlisting}
+library(survival)
+donnee <- read.delim("Desktop/u de m/STT6510/projet2/datasurv.txt", header = TRUE, sep = " ")
+#donnee <- read.delim("datasurv.txt", header = TRUE)
+attach(donnee)
+
+#3a
+#surv_objet <- Surv(time_days, event)
+#print(grepl("\\+$", surv_objet[1]))
+
+max_jour <- 500
+t <- seq(max_jour)
+n <- rep(0, max_jour)
+d <- rep(0, max_jour)
+q <- rep(0, max_jour)
+S <- rep(0, max_jour)
+n[1] <- sum(time_days >= 1)
+S[1] <- 1
+
+for (i in 2:max_jour) {
+  n[i] <- sum(time_days >= i)
+  if (i %in% time_days) {
+    d[i] <- sum(event[which(time_days == i)])
+  } 
+  q[i] <- d[i] / n[i]
+  S[i] <- S[i-1] * (1 - q[i])
+}
+
+tableau_a_remettre <- data.frame(
+  cbind(t[sort(time_days[event == 1])], 
+        n[sort(time_days[event == 1])], 
+        d[sort(time_days[event == 1])], 
+        q[sort(time_days[event == 1])],
+        1 - q[sort(time_days[event == 1])],
+        S[sort(time_days[event == 1])]))
+names(tableau_a_remettre) <- c("t", "n", "d", "q", "1-q", "S")
+print(tableau_a_remettre)
+
+t  n d          q       1-q         S
+1 196 18 1 0.05555556 0.9444444 0.9444444
+2 258 13 1 0.07692308 0.9230769 0.8717949
+3 262 12 1 0.08333333 0.9166667 0.7991453
+4 375  5 1 0.20000000 0.8000000 0.6393162
+5 377  3 1 0.33333333 0.6666667 0.4262108
+6 409  2 1 0.50000000 0.5000000 0.2131054
+
+\end{lstlisting}
+
+\section*{Exercice 3b}
 En R, réalisez un graphique de $q$ en fonction de $t$ pour $t \in \{1, \cdots, 500\}$.
 Ici, $q(t) = q_i$ si $t \in \{1, \cdots, t_D\}$ et $q(t) = 0$ sinon.
 Produisez en particulière le même graphique pour $t \in \{200, \cdots, 260\}$
