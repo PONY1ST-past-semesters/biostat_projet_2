@@ -78,10 +78,20 @@ t  n d          q       1-q         S
 
 \end{lstlisting}
 
-\section*{Exercice 3b}
+\section*{Exercice 3bc}
 En R, réalisez un graphique de $q$ en fonction de $t$ pour $t \in \{1, \cdots, 500\}$.
-Ici, $q(t) = q_i$ si $t \in \{1, \cdots, t_D\}$ et $q(t) = 0$ sinon.
-Produisez en particulière le même graphique pour $t \in \{200, \cdots, 260\}$
+Ici, $q(t) = q_i$ si $t \in \{1, \cdots, t_D\}$ et $q(t) = 0$.Sinon,
+Produisez en particulière le même graphique pour $t \in \{200, \cdots, 260\}$.
+
+\begin{lstlisting}
+library(ggplot2)
+
+p <- ggplot(data.frame(t = t, q = q), aes(x = t, y = q)) +
+  geom_line() +  labs(title = "Line Chart Example", x = "Time", y = "Value")
+show(p)
+
+\end{lstlisting}
+
 Finalement, lissez cela utilisant le noyau d'Epanechnikov avec un paramètre de lissage $5$.
 Plus précisément, on définit le noyau d'Epanechnikov comme $K(u) = \frac{3}{4}(1-u^2)\chi_{[-1,1]}(u)$
 pour tout $u \in \mathbb{R}$ et on définit la fonction de lissage comme :
@@ -94,7 +104,43 @@ Ici $b = 5$.
 Produisez un graphique de $\hat{h}$ en fonction de $t$ pour $t \in \{200, \cdots, 260\}$.
 Vérifiez les résultats en main pour $t = \{200, 210, 220, 230, 240, 250\}$.
 
-\paragraph{Solution}
+\section*{Exercice 3d}
+
+\begin{lstlisting}
+#3d
+debut <- 200
+fin <- 260
+
+p <- ggplot(data.frame(t = t[debut:fin], q = q[debut:fin]), aes(x = t, y = q)) +
+  geom_line() +  labs(title = "Line Chart Example", x = "Time", y = "Value")
+show(p)
+
+epanechnikov <- function(u) {
+  if (abs(u) <= 1) {
+    return(0.75 * (1 - u^2))
+  } else {
+    return(0)
+  }
+}
+
+b <- 5
+D <- length(t[sort(time_days[event == 1])])
+lisse <- rep(0, fin - debut)
+for (i in debut:fin) {
+  diff_seq <- (i - t[sort(time_days[event == 1])])/b
+  epan <- rep(0, D)
+  for (j in 1:D) {
+    epan[j] <- epanechnikov(diff_seq[j])
+  }
+  lisse[i - debut + 1] <- (1/b)*sum(q[sort(time_days[event == 1])] * epan)
+}
+
+p <- ggplot(data.frame(t = t[debut:fin], lisse = lisse), aes(x = t, y = lisse)) +
+  geom_line() +  labs(title = "Line Chart Example", x = "Time", y = "Value")
+show(p)
+
+\end{lstlisting}
+
 
 à complet
 
