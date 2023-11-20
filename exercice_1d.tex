@@ -9,45 +9,36 @@ construisez un intervalle de confiance à $95\%$ pour le temps médian de survie
     
 \paragraph{Solution}
 
-%?
-Le but de ce problème est de se concentrer sur 
-le groupe de patients qui n'ont pas reçu de traitement au laser 
-(i.e., \texttt{trt = 0}) et de trouver le temps de survie médian 
-dans ce sous-ensemble, qui est défini ici comme le temps écoulé 
-entre le début du traitement et la cécité. 
-Nous devons ensuite calculer un intervalle de confiance à 
-$95\%$ pour ce temps de survie médian, et nous avons choisi d'utiliser la méthode "log-log" fournie par Barker (2009).
-    
 Le code R crée d'abord un sous-ensemble des données \texttt{subsetdata} 
 en filtrant les patients avec \texttt{trt == 0} de l'ensemble de données 
-\texttt{diabetic} à l'aide de la fonction subset. %?
+\texttt{diabetic} à l'aide de la fonction \texttt{subset}.
 Ensuite, nous avons utilisé la fonction \texttt{survfit} 
 pour estimer la durée de survie médiane de ce sous-ensemble 
-et l'intervalle de confiance à $95\%$ correspondant, 
-où nous avons choisi le type d'intervalle de confiance "log-log".
+et l'intervalle de confiance à $95\%$ correspondant.
+
+\begin{lstlisting}
+    subset_data <- subset(diabetic,trt == 0)
+    fit <- survfit(Surv(time,status) ~ 1,data=subset_data, conf.type="log-log")
+    result.km<-fit
+    print(result.km)
+\end{lstlisting}
     
-Selon les résultats obtenus :
+La réponse est :
+    
+\begin{lstlisting}
+    Call: survfit(formula = Surv(time, status) ~ 1, data = subset_data, 
+        conf.type = "log-log")
+        
+            n events median 0.95LCL 0.95UCL
+    [1,] 197    101   43.7    31.6    59.8
+\end{lstlisting}
+
+Donc :
+
 \begin{enumerate}
     \item Chez les patients n'ayant pas reçu de traitement (\texttt{trt = 0}), la durée médiane de survie est de $43,7$ jours.
-    \item L'intervalle de confiance à $95\%$ a une limite inférieure de $31,6$ jours et une limite supérieure de $59,8$ jours.
+    \item L'intervalle de confiance à $95\%$ a une limite inférieure de $31,6$ jours et une limite supérieure de $59,8$ jours. ////
 \end{enumerate}
-    
-\begin{lstlisting}
-subset_data <- subset(diabetic,trt == 0)
-fit <- survfit(Surv(time,status) ~ 1,data=subset_data, conf.type="log-log")
-result.km<-fit
-print(result.km)
-\end{lstlisting}
-
-La réponse est :
-
-\begin{lstlisting}
-Call: survfit(formula = Surv(time, status) ~ 1, data = subset_data, 
-    conf.type = "log-log")
-    
-        n events median 0.95LCL 0.95UCL
-[1,] 197    101   43.7    31.6    59.8
-\end{lstlisting}
 
 \end{CJK*}
 \end{document}

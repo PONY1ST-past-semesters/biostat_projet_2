@@ -9,15 +9,15 @@ Expliquez sans le faire comment on peut vérifier cette hypothèse.
     
 \paragraph{Solution}
 
-%????
-le rapport de risque (hazard ratio) entre les individus est constant.Cela signifie que l'ampleur relative du risque entre les individus ne change pas au fil du temps.
-    
-Nous pouvons utiliser les diagrammes des résidus de Schoenfeld, 
-qui montrent les résidus de Schoenfeld 
-(une mesure de l'impact des variables sur le risque au fil du temps) 
-en fonction du temps. Si l'hypothèse de risque proportionnel se vérifie, 
-ces points ne présenteraient aucune tendance systématique dans le temps, 
-c'est-à-dire qu'ils seraient distribués de manière aléatoire autour d'une ligne horizontale.
+Le modèle de Cox fait une hypothèse que 
+le rapport de risque entre les individus des groupes 
+de traitements et du groupe de contrôle
+est constant pour tout temps.
+Cela signifie que l'ampleur relative 
+du risque entre les individus ne change pas au fil du temps.
+Afin de vérifier cette hypothèse, il s'agit tout simplement d'observer si des courbes de 
+fonctions hasard sont proportionnelles en tout temps ou non.
+Pour une méthode non graphique, on peut aussi utiliser les résidus de Schoenfeld. ////
 
 \end{CJK*}
 \end{document}
