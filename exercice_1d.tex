@@ -9,10 +9,11 @@ construisez un intervalle de confiance à $95\%$ pour le temps médian de survie
     
 \paragraph{Solution}
 
-Le code R crée d'abord un sous-ensemble des données \texttt{subsetdata} 
+On procède en R, commençant 
+d'abord par un sous-ensemble des données \texttt{subsetdata} 
 en filtrant les patients avec \texttt{trt == 0} de l'ensemble de données 
 \texttt{diabetic} à l'aide de la fonction \texttt{subset}.
-Ensuite, nous avons utilisé la fonction \texttt{survfit} 
+Ensuite, on utilise la fonction \texttt{survfit} 
 pour estimer la durée de survie médiane de ce sous-ensemble 
 et l'intervalle de confiance à $95\%$ correspondant.
 
@@ -33,12 +34,10 @@ La réponse est :
     [1,] 197    101   43.7    31.6    59.8
 \end{lstlisting}
 
-Donc :
-
-\begin{enumerate}
-    \item Chez les patients n'ayant pas reçu de traitement (\texttt{trt = 0}), la durée médiane de survie est de $43,7$ jours.
-    \item L'intervalle de confiance à $95\%$ a une limite inférieure de $31,6$ jours et une limite supérieure de $59,8$ jours. ////
-\end{enumerate}
+On conclut que, chez les patients n'ayant pas reçu de traitement
+(\texttt{trt = 0}), la durée médiane de survie est de $43,7$ jours.
+Un intervalle de confiance à $95\%$ pour la durée médiane de survie 
+a une limite inférieure de $31,6$ jours et une limite supérieure de $59,8$ jours. ////
 
 \end{CJK*}
 \end{document}

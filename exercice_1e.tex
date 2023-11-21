@@ -4,7 +4,8 @@
 \begin{CJK*}{UTF8}{gbsn}
 
 \section*{Exercice 1e}
-Faites un test de Log-Rank pour comparer les deux groupes. Discutez les résultats.
+Faites un test de Log-Rank pour comparer les deux groupes \texttt{trt = 0} et \texttt{trt = 1}. 
+Discutez les résultats.
     
 \paragraph{Solution}
 On effectue un test de Log-Rank :
@@ -30,18 +31,14 @@ trt=1      22.2
 Chisq= 22.2  on 1 degrees of freedom, p= 2e-06 
 \end{lstlisting}
 
-Comme la p-valeur est $2e-06$, qui est bien inférieure à $0,05$,
- la différence de temps avant la cécité entre les deux 
+Comme la p-valeur est $2 \times 10^{-6}$, qui est bien inférieure à $0,05$,
+la différence de temps avant la cécité entre les deux 
 groupes de traitement est statistiquement significative. 
-En outre, dans ce cas, le nombre de cécités était significativement 
-plus élevé que prévu dans le groupe qui n'a pas reçu de traitement au laser 
-(\texttt{trt=0}), tandis que le nombre de cécités était plus faible que prévu 
-dans le groupe qui a reçu un traitement au laser (\texttt{trt=1}).
-    
-En conclusion, les résultats du test Log-Rank ont 
-montré que le fait de recevoir ou non un traitement 
-au laser a un effet significatif sur la courbe 
-de survie des patients. Cela implique que le 
+Dans ce cas, le rapport de risque entre le groupe \texttt{trt=1}
+et le groupe \texttt{trt=0} est plus petit que $1$.
+Il y a donc suffisamment de preuve statistique pour dire que 
+le traitement au laser peut diminuer le risque de cécité.
+Cela implique que le 
 traitement au laser peut être une intervention 
 efficace pour retarder la perte de vision chez les patients diabétiques. ////
 

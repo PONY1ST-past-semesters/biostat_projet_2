@@ -22,13 +22,16 @@ print(names(diabetic))
 #1bc
 #Kaplan-Meier 
 result.km <- survfit(Surv(time, status) ~ 1, conf.type="log-log")
-plot(result.km, xlab = "Jours", ylab = "Probabilité de Survie", main = "Kaplan-Meier")
+plot(result.km, xlab = "Jours", ylab = "Probabilité de Survie", 
+main = "Relation entre le nombre de jours et la probabilité de survie selon le modèle Kaplan-Meier")
 result.kmtrt0 <- survfit(Surv(time[trt == 0], status[trt == 0]) ~ 1, conf.type="log-log")
 par(new=TRUE)
-plot(result.kmtrt0, xlab = "Jours", ylab = "Probabilité de Survie", main = "Kaplan-Meier", col = "red")
+plot(result.kmtrt0, xlab = "Jours", ylab = "Probabilité de Survie", 
+main = "Relation entre le nombre de jours et la probabilité de survie selon le modèle Kaplan-Meier", col = "red")
 result.kmtrt1 <- survfit(Surv(time[trt == 1], status[trt == 1]) ~ 1, conf.type="log-log")
 par(new=TRUE)
-plot(result.kmtrt1, xlab = "Jours", ylab = "Probabilité de Survie", main = "Kaplan-Meier", col = "blue")
+plot(result.kmtrt1, xlab = "Jours", ylab = "Probabilité de Survie", 
+main = "Relation entre le nombre de jours et la probabilité de survie selon le modèle Kaplan-Meier", col = "blue")
 legend("topright", legend=c("totale","trt = 0", "trt = 1"), col=c("black","red", "blue"), lty=1:5, cex=0.8)
 #abline ( v = 43.7 , col = 'red' , lty =2)
 
@@ -56,7 +59,9 @@ diabetic$age_group <- ifelse(diabetic$age <= median_age, "younger", "older")
 # 使用survfit函数根据年龄组计算Kaplan-Meier生存曲线
 result.kmage <- survfit(Surv(time, status) ~ age_group, data = diabetic)
 # 绘制Kaplan-Meier生存曲线
-plot(result.kmage, main = 'Courbe de Kaplan-Meier', xlab = 'Temps en jours', ylab = 'Probabilite de survie', col = c("red", "blue"))
+plot(result.kmage, main = 'Relation entre le nombre de jours et la probabilité de survie selon le modèle Kaplan-Meier', 
+xlab = 'Temps en jours', ylab = 'Probabilite de survie', col = c("red", "blue"))
+legend("topright", legend=c("younger", "older"), col=c("red", "blue"), lty=1:5, cex=1)
 # 进行分层的Log-Rank测试
 survdiff(Surv(time, status) ~ trt + strata(age), data = diabetic)
 #Dans notre analyse approfondie de l'ensemble de données sur les diabetic, 

@@ -3,9 +3,7 @@
 \begin{CJK*}{UTF8}{gbsn}
 \section*{Exercice 3bc}
 En R, réalisez un graphique de $q$ en fonction de $t$ pour $t \in \{1, \cdots, 500\}$.
-Ici, $q(t) = q_i$ si $t \in \{1, \cdots, t_D\}$ et $q(t) = 0$.Sinon,
-Produisez en particulière le même graphique pour $t \in \{200, \cdots, 260\}$.
-
+Ici, $q(t) = q_i$ dans exercice 3a si $t \in \{1, \cdots, t_D\}$ et $q(t) = 0$ autrement. 
 Finalement, lissez cela utilisant le noyau d'Epanechnikov avec un paramètre de lissage $5$.
 Plus précisément, on définit le noyau d'Epanechnikov comme $K(u) = \frac{3}{4}(1-u^2)\chi_{[-1,1]}(u)$
 pour tout $u \in \mathbb{R}$ et on définit la fonction de lissage comme :
@@ -15,30 +13,30 @@ pour tout $u \in \mathbb{R}$ et on définit la fonction de lissage comme :
 \end{equation*}
 
 Ici $b = 5$. 
-Produisez un graphique de $\hat{h}$ en fonction de $t$ pour $t \in \{200, \cdots, 260\}$.
-Vérifiez les résultats en main pour $t = \{200, 210, 220, 230, 240, 250\}$.
+Calculez les résultats en main pour $t = \{200, 210, 220, 230, 240, 250\}$.
 
 \smallskip
 \paragraph{Solution}
 
-On procède encore en R :
+On produit le graphique en R :
 
 \begin{lstlisting}
-  library(ggplot2)
-  
-  p <- ggplot(data.frame(t = t, q = q), aes(x = t, y = q)) +
+library(ggplot2)
+p <- ggplot(data.frame(t = t, q = q), aes(x = t, y = q)) +
     geom_line() +  labs(title = "Line Chart Example", x = "Time", y = "Value")
-  show(p)
-  
+show(p)
 \end{lstlisting}
-  
+
+La réponse est :
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{3BC.JPG}
   \label{fig:mesh1}
 \end{figure}
 
-Selon la définition de $K$, on a $K(\frac{t-t_{i}}{b}) = 0$ si $\abs{t_i-t}>b$.
+Selon la définition de $K$, on a $K(\frac{t-t_{i}}{b}) = 0$ si $\abs{t_i-t} > b$. 
+On a :
 
 \begin{equation*}
     \hat{h}(200) = \frac{1}{5} \times K\bracket{\frac{200-196}{5}} \times \frac{1}{18}
@@ -47,7 +45,9 @@ Selon la définition de $K$, on a $K(\frac{t-t_{i}}{b}) = 0$ si $\abs{t_i-t}>b$.
                  = \frac{3}{1000}
 \end{equation*}
 
-On a que $\hat{h}(210) = \hat{h}(220) = \hat{h}(230) = \hat{h}(240) =  \hat{h}(250) = 0$. ////
+Par inspection,
+on a que $\hat{h}(210) = \hat{h}(220) = \hat{h}(230) = \hat{h}(240) =  \hat{h}(250) = 0$. 
+Le calcul est complet. ////
 
 \end{CJK*}
 \end{document}

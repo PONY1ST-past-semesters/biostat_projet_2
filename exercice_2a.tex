@@ -13,64 +13,12 @@ les rapports de risque pour toutes les variables explicatives avec leurs interva
 
 \paragraph{Solution}
 
-L'ensemble des données comprenait $2982$ patientes avec $1518$ événements 
-(récidive du cancer du sein). 
-La cohérence (concordance) du modèle était de $0,678$, 
-ce qui signifie que la précision de la prédiction du modèle était modérée.
-
-Les résultats suivants montrent l'effet de chaque variable sur le risque de récidive, 
-exprimé en rapport de risque :
-
-\begin{itemize}
-  \item \textbf{Âge (age)} : le rapport de risque était de $0,9859$, 
-  indiquant une diminution légère (environ $\frac{1}{0.9859} - 1 \approx 1,4\%$) du risque de récidive 
-  pour chaque année d'âge supplémentaire. Cet effet est significatif 
-  (valeur \( p < 0,05 \)). L'intervalle de confiance à $95 \%$ est de $0,9792$ à $0,9927$.
-  \item \textbf{Statut ménopausique (meno)} : 
-  le rapport de risque est de $1,1969$, signifiant 
-  que les patientes ménopausées ont un risque de récidive environ 
-  $20\%$ plus élevé que les patientes non ménopausées. 
-  Cet effet est également significatif (valeur \( p < 0,05 \)). 
-  L'intervalle de confiance à $95 \%$ était compris entre $1,0069$ et $1,4228$.
-  \item \textbf{Taille de la tumeur (taille 20-50 et taille >50)} : 
-  des tumeurs plus grandes ($20-50 \text{mm}$ et $> 50 \text{mm}$) 
-  ont été associées à un risque accru de récidive, 
-  avec des rapports de risques de $1,4462$ et $1,8996$ respectivement. 
-  Les intervalles de confiance sont respectivement de $1,2909$ à $1,6202$ et de $1,5988$ à $2,2571$. 
-  Ces effets sont significatifs (valeur \( p < 0,05 \)). 
-  Cela suggère que plus la tumeur est importante, 
-  plus son impact sur le risque de récidive est grand, 
-  et que cet impact est relativement certain.
-  \item \textbf{Grade pathologique (grade)} : 
-  le rapport de risque était de $1,4413$, 
-  indiquant que les tumeurs de grade supérieur 
-  sont associées à un risque plus élevé de récidive. 
-  Cet effet est aussi significatif (valeur \( p < 0,05 \)). 
-  L'intervalle de confiance à $95 \%$ est compris entre $1,2703$ et $1,6353$.
-  \item \textbf{Nombre de ganglions lymphatiques atteints (nodes)} : 
-  le rapport de risque était de $1,0802$, 
-  chaque ganglion supplémentaire atteint augmentant le risque de récidive d'environ $8\%$. 
-  Cet effet est hautement significatif (valeur \( p < 0,001 \)). 
-  L'intervalle de confiance à $95 \%$ est compris entre $1,0706$ et $1,0900$.
-  \item \textbf{Chimiothérapie (chemo)} : 
-  le rapport de risque était de $0,8902$, 
-  indiquant un risque légèrement plus faible de récidive 
-  chez les patients recevant une chimiothérapie. 
-  Toutefois, cette différence n'était pas statistiquement significative (valeur \( p = 0,0993 \)). 
-  L'intervalle de confiance à $95 \%$ est compris entre $0,7751$ et $1,0222$.
-\end{itemize}
-
-Ces résultats suggèrent que l'âge, 
-le statut ménopausique, la taille de la tumeur, 
-le classement pathologique et le nombre de ganglions lymphatiques atteints 
-sont des facteurs prédictifs importants de la récidive du cancer du sein.
+On ajuste le modèle de Cox :
 
 \begin{lstlisting}
-#ex2
 library(survival)
 data(rotterdam)
 attach(rotterdam)
-#2a
 resultat.cox <- coxph(Surv(rtime, recur) ~ age + meno + size + grade + nodes + chemo, data = rotterdam)
 print(summary(resultat.cox))
 \end{lstlisting}
@@ -109,5 +57,51 @@ Likelihood ratio test= 468.6  on 7 df,   p=<2e-16
 Wald test            = 589.9  on 7 df,   p=<2e-16
 Score (logrank) test = 647.9  on 7 df,   p=<2e-16
 \end{lstlisting}
+
+Les résultats suivants montrent l'effet de chaque variable sur le risque de récidive, 
+exprimé en rapport de risque :
+
+\begin{itemize}
+    \item \textbf{Âge (age)} : le rapport de risque était de $0,9859$, 
+indiquant une diminution légère (environ $\frac{1}{0.9859} - 1 \approx 1,4\%$) du risque de récidive 
+pour chaque année d'âge supplémentaire. Cet effet est significatif 
+(valeur \( p < 0,05 \)). L'intervalle de confiance à $95 \%$ est de $0,9792$ à $0,9927$.
+    \item \textbf{Statut ménopausique (meno)} : 
+le rapport de risque est de $1,1969$, signifiant 
+que les patientes ménopausées ont un risque de récidive environ 
+$20\%$ plus élevé que les patientes non ménopausées. 
+Cet effet est également significatif (valeur \( p < 0,05 \)). 
+L'intervalle de confiance à $95 \%$ était compris entre $1,0069$ et $1,4228$.
+    \item \textbf{Taille de la tumeur (taille 20-50 et taille >50)} : 
+des tumeurs plus grandes ($20-50 \text{mm}$ et $> 50 \text{mm}$) 
+ont été associées à un risque accru de récidive, 
+avec des rapports de risques de $1,4462$ et $1,8996$ respectivement. 
+Les intervalles de confiance sont respectivement de $1,2909$ à $1,6202$ et de $1,5988$ à $2,2571$. 
+Ces effets sont significatifs (valeur \( p < 0,05 \)). 
+Cela suggère que plus la tumeur soit importante, 
+plus son impact sur le risque de récidive est grand, 
+et que cet impact est relativement certain.
+    \item \textbf{Grade pathologique (grade)} : 
+le rapport de risque était de $1,4413$, 
+indiquant que les tumeurs de grade supérieur 
+sont associées à un risque plus élevé de récidive. 
+Cet effet est aussi significatif (valeur \( p < 0,05 \)). 
+L'intervalle de confiance à $95 \%$ est compris entre $1,2703$ et $1,6353$.
+    \item \textbf{Nombre de ganglions lymphatiques atteints (nodes)} : 
+le rapport de risque était de $1,0802$, 
+chaque ganglion supplémentaire atteint augmentant le risque de récidive d'environ $8\%$. 
+Cet effet est hautement significatif (valeur \( p < 0,001 \)). 
+L'intervalle de confiance à $95 \%$ est compris entre $1,0706$ et $1,0900$.
+    \item \textbf{Chimiothérapie (chemo)} : 
+le rapport de risque était de $0,8902$, 
+indiquant un risque légèrement plus faible de récidive 
+chez les patients recevant une chimiothérapie. 
+Toutefois, cette différence n'était pas statistiquement significative (valeur \( p = 0,0993 \)). 
+L'intervalle de confiance à $95 \%$ est compris entre $0,7751$ et $1,0222$.
+\end{itemize}
+
+On note aussi que l'ensemble des données comprenait $2982$ patientes avec $1518$ événements 
+(récidive du cancer du sein). La cohérence (concordance) du modèle était de $0,678$, 
+ce qui signifie que la précision de la prédiction du modèle était modérée. ////
 \end{CJK*}
 \end{document}

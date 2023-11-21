@@ -15,16 +15,11 @@ Dans la vie quotidienne, on trouve que des personnes
 âgées ont plus grande probabilité de devenir aveugle. 
 On soupçonne naturellement que l'âge
 soit un facteur confondant qui influence la durée jusqu'à la cécité.
-On utilise donc l'âge comme la variable à analyser. 
-On va d'abord tracer les courbes de survie pour les deux groupes de l'âge.
-Notamment, on classe les patients en deux groupes, "Younger" et "Older",
-selon si l'âge du patient soit inférieur ou supérieur à l'âge médian.
-Pour ce faire, on commence par la graphique Kaplan-Meier pour les deux groupes,
-en utilisant le rouge pour représenter le groupe "Younger" 
-et le bleu pour représenter le groupe "Older". 
-Le graphique montre que la courbe rouge est plus élevée que la courbe bleue 
-à la plupart des moments, ce qui signifie que la probabilité de survie est plus 
-élevée pour le groupe "Younger" que pour le groupe "Older". 
+On analyse donc la variable \texttt{age}. 
+Afin de confirmer cette intuition,
+on classe les patients en deux groupes, \texttt{younger} et \texttt{older},
+selon si l'âge du patient soit inférieur ou supérieur à l'âge médian
+et trace les courbes de Kaplan-Meier pour ces deux groupes. 
 
 \begin{lstlisting}
     median_age <- median(diabetic$age, na.rm = TRUE)
@@ -37,13 +32,19 @@ Le plot est :
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{1F.JPG}
+    \includegraphics[width=0.4\textwidth]{1f.png}
     \label{fig:mesh1}
 \end{figure}
-  
-Sur cette graphique on peut trouver que le groupe de patients "Younger"
-présente une probabilité de cécité plus faible que le groupe de patients "Older".
+
+Le graphique montre que la courbe \texttt{younger} est plus élevée que la courbe \texttt{older} 
+à la plupart des moments.
+On soupçonne que l'âge est à moins un bloc parce que 
+la probabilité de survie soit plus 
+élevée pour le groupe \texttt{younger} que pour le groupe \texttt{older}. 
+Donc, on observe que le groupe \texttt{younger}
+présente une probabilité de cécité plus faible que le groupe \texttt{older}.
 Par conséquent, on conclut que l'âge est un facteur important.
+
 On effectue le test de Log-Rank stratifié pour les deux groupes d'âge.
 
 \begin{lstlisting}
@@ -63,15 +64,19 @@ trt=1 197       54     83.1      10.2      23.4
     Chisq= 23.4  on 1 degrees of freedom, p= 1e-06
 \end{lstlisting}
 
-Comme la p-valeur est $1e-06$,
+Comme la p-valeur est $10^{-6}$,
 il y a une différence significative dans le délai de cécité entre les deux groupes de traitement.
-Même après stratification par âge, il existe toujours une différence 
+Même après stratification par âge, il existe encore une différence 
 significative dans le risque de cécité entre le groupe \texttt{trt=1}
 et le groupe de \texttt{trt=0}. 
-On conclut que les patients du groupe de \texttt{trt=1} ont une probabilité de cécité plus faible que 
+On conclut que les patients du groupe de \texttt{trt=1} 
+ont une probabilité de cécité plus faible que 
 les patients du groupe \texttt{trt=0}. 
-En conclusion, l'âge est un facteur important influençant la durée 
-de la cécité et qu'il doit être pris en compte lors de l'élaboration des stratégies de traitement. ////
+
+En conclusion, l'âge est un facteur important influençant la durée à la cécité 
+et qu'il doit être pris en compte lors de l'élaboration des stratégies de traitement.
+Dans tous les deux groupes d'âges, le traitement de laser diminue toujours 
+le risque de cécité. ////
 
 \end{CJK*}
 \end{document}

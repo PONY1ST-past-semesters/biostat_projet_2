@@ -4,16 +4,17 @@
 \begin{CJK*}{UTF8}{gbsn}
 
 \section*{Exercice 3d}
-On compare deux estimateurs de la fonction de risque et produire deux graphiques séparés.
-\begin{enumerate}
-  \item1. Il représente la fonction $h^\hat{(t)} = \frac{d_i}{n_i}$, l'intervalle de temps est $t$ entre 200 et 260.
-  \item2. Il montre la fonction $h^\hat{(t)}$ lissée avec le noyau d'Epanechnikov, également pour $t$ entre 200 et 260.
-\end{enumerate}
+
+Comparez les deux estimateurs de la fonction de risque,
+un avec le lissage du noyau d'Epanechnikov et l'autre sans lissage,
+en utilisant le plot dans l'intervalle $[200,260]$.
+Discutez les résultats.
 
 \paragraph{Solution}
 
+On procède en R :
+
 \begin{lstlisting}
-#3d
 debut <- 200
 fin <- 260
 
@@ -42,10 +43,11 @@ for (i in debut:fin) {
 }
 
 p <- ggplot(data.frame(t = t[debut:fin], lisse = lisse), aes(x = t, y = lisse)) +
-  geom_line() +  labs(title = "Line Chart Example", x = "Time", y = "Value")
+    geom_line() +  labs(title = "Line Chart Example", x = "Time", y = "Value")
 show(p)
-
 \end{lstlisting}
+
+Les réponses sont :
 
 \begin{figure}[H]
   \centering
@@ -59,9 +61,13 @@ show(p)
   \label{fig:mesh1}
 \end{figure}
 
-En comparant, on trouve que le deuxième graphique est plus doux que le premier.
-Le deuxième graphique présente également un nouveau pic, 
-qui s'explique par le fait qu'une personne est décédée le jour 196.
-
+En comparant, on trouve que le deuxième graphique est plus lisse que le premier.
+Le deuxième graphique présente également un nouveau pic à gauche
+et un sommet plus haut à droite, 
+qui s'explique par le fait qu'une personne est décédée le jour $196$ et $262$,
+une information manquante dans le premier graphique.
+On conclut que la version lisse pourrait avoir plus 
+d'informations que la version non-lisse
+dans un domaine de temps donné. ////
 \end{CJK*}
 \end{document}
