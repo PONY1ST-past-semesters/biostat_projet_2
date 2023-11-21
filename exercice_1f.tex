@@ -36,19 +36,13 @@ Le plot est :
     \label{fig:mesh1}
 \end{figure}
 
-Le graphique montre que la courbe \texttt{younger} est plus élevée que la courbe \texttt{older} 
-à la plupart des moments.
-On soupçonne que l'âge est à moins un bloc parce que 
+On soupçonne donc que l'âge est à moins un bloc parce que 
 la probabilité de survie soit plus 
 élevée pour le groupe \texttt{younger} que pour le groupe \texttt{older}. 
-Donc, on observe que le groupe \texttt{younger}
-présente une probabilité de cécité plus faible que le groupe \texttt{older}.
-Par conséquent, on conclut que l'âge est un facteur important.
-
 On effectue le test de Log-Rank stratifié pour les deux groupes d'âge.
 
 \begin{lstlisting}
-    survdiff(Surv(time, status) ~ trt + strata(age), data = diabetic)
+survdiff(Surv(time, status) ~ trt + strata(age), data = diabetic)
 \end{lstlisting}
 
 Le résultat est :
